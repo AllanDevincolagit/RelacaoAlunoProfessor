@@ -1,0 +1,59 @@
+﻿@model IEnumerable<RelacaoAlunoProfessor.Entidades.Materia>
+
+@{
+    ViewData["Title"] = "Lista de Matérias";
+}
+
+<h1>Lista de matérias</h1>
+
+<form action="Materia/Index" method="get">
+    <div class="card-header">Pesquisar Matérias</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <a href="Materia/Create" class="btn btn-primary">Criar Nova Matéria</a>
+            </div>
+            <div class="col-4">
+                <input type="text" name="pesquisamat" class="form-control" placeholder="Pesquisar Matéria" />
+                <select name="TipoPesquisaMat" class="form-control">
+                    <option value="Todos">Pesquisar por Todos</option>
+                    <option value="Area">Pesquisar por Área</option>
+                    <option value="Nome">Pesquisar por Nome</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
